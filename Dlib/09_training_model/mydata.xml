@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<?xml-stylesheet type='text/xsl' href='image_metadata_stylesheet.xsl'?>
+<dataset>
+<name>imglab dataset</name>
+<comment>Created by imglab tool.</comment>
+<images>
+  <image file='images\cat_0000.jpg'>
+    <box top='5' left='55' width='181' height='134'/>
+  </image>
+  <image file='images\cat_0001.jpg'>
+    <box top='17' left='241' width='312' height='230'/>
+  </image>
+  <image file='images\cat_0002.jpg'>
+    <box top='2' left='30' width='335' height='261'/>
+  </image>
+  <image file='images\cat_0003.jpg'>
+    <box top='0' left='297' width='1018' height='943'/>
+  </image>
+  <image file='images\cat_0004.jpg'>
+    <box top='-1' left='0' width='220' height='158'/>
+  </image>
+  <image file='images\cat_0005.jpg'>
+    <box top='1' left='112' width='124' height='106'/>
+  </image>
+  <image file='images\cat_0006.jpg'>
+    <box top='47' left='108' width='108' height='81'/>
+  </image>
+  <image file='images\cat_0007.jpg'>
+    <box top='6' left='112' width='139' height='133'/>
+  </image>
+  <image file='images\cat_0008.jpg'>
+    <box top='2' left='506' width='699' height='515'/>
+  </image>
+  <image file='images\cat_0009.jpg'>
+    <box top='126' left='206' width='269' height='205'/>
+  </image>
+  <image file='images\cat_0010.jpg'>
+    <box top='12' left='88' width='155' height='137'/>
+  </image>
+  <image file='images\cat_0011.jpg'>
+    <box top='0' left='2' width='143' height='145'/>
+  </image>
+</images>
+</dataset>
