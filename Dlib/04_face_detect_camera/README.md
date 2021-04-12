@@ -1,6 +1,6 @@
 # Face Detect with Camera
 
-```
+```python
 import dlib
 import cv2
 

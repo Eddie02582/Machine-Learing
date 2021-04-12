@@ -2,7 +2,7 @@
 
 與人臉檢測一樣差別是使用detector.run取代detector
 
-```
+```python
 import dlib
 import cv2
 import imutils

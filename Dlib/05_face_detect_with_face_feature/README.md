@@ -1,3 +1,6 @@
+# Face Detect with Face Feature
+
+```python
 import dlib
 import cv2
 import imutils
@@ -6,37 +9,39 @@ import sys
 
 os.chdir(sys.path[0])
 
-# è®€å–åœ–æª”
+# Åª¨ú¹ÏÀÉ
 img = cv2.imread('image.jpg')
 
-# æ”¾å¤§åœ–ç‰‡
+# ÁY¤p¹Ï¤ù
 img = imutils.resize(img, width=800)
 
-# Dlib çš„äººè‡‰åµæ¸¬å™¨
+# Dlib ªº¤HÁy°»´ú¾¹
 detector = dlib.get_frontal_face_detector()
 
-#äººè‡‰68ç‰¹å¾µé»æ¨¡å‹æª¢æ¸¬å™¨
+#¤HÁy68¯S¼xÂI¼Ò«¬ÀË´ú¾¹
 shape_predictor = dlib.shape_predictor("..\dat\shape_predictor_68_face_landmarks.dat") 
 
-# åµæ¸¬äººè‡‰
+# °»´ú¤HÁy
 face_rects = detector(img, 0)
 
-# å–å‡ºæ‰€æœ‰åµæ¸¬çš„çµæœ
+# ¨ú¥X©Ò¦³°»´úªºµ²ªG
 for i, d in enumerate(face_rects):    
     x1 = d.left()
     y1 = d.top()
     x2 = d.right()
     y2 = d.bottom()
     
-    #68ç‰¹å¾µé»åµæ¸¬
+    #68¯S¼xÂI°»´ú
     shape = shape_predictor(img,d)
     for index, pt in enumerate(shape.parts()):
         print('Part {}: {}'.format(index, pt))
         pt_pos = (pt.x, pt.y)
         cv2.circle(img, pt_pos, 2, (255, 0, 0), 1)
 
-# é¡¯ç¤ºçµæœ
+# Åã¥Üµ²ªG
 cv2.imshow("Face Detection", img)
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
+
+```

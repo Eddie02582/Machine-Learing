@@ -1,3 +1,61 @@
+# Face Recognition with npy data
+
+
+«e¤@½g¤¶²Ğ¦p¦ó±q¸ê®Æ§¨Åª¨úÀÉ®×¿ëÃÑ,³o½g¥ı±N¹ÏÀÉ¸ê®ÆÂà¦s¦¨.npy ÀÉ,¿ëÃÑ®É¦bÅª¨ú<br>
+
+
+## ²£¥Ínpy data
+
+
+```python
+import dlib,os,glob
+import numpy
+from skimage import io
+import numpy as np
+import cv2
+import imutils
+from pathlib import Path
+
+def create_npy_data():
+
+    face_npy_path = "./resources/"      
+    face_data_path = "./face"
+    # Dlib ªº¤HÁy°»´ú¾¹
+    detector = dlib.get_frontal_face_detector()
+    
+    #¤HÁy68¯S¼xÂI¼Ò«¬ÀË´ú¾¹
+    shape_predictor = dlib.shape_predictor("shape_predictor_68_face_landmarks.dat") 
+
+    #¸ü¤J¤HÁy¿ëÃÑ¼Ò«¬¤ÎÀË´ú¾¹
+    face_rec_model = dlib.face_recognition_model_v1("dlib_face_recognition_resnet_model_v1.dat")   
+
+    
+    img_files = glob.glob(os.path.join(face_data_path,"*.jpg"))
+    for img_file in img_files:    
+        img = io.imread(img_file)     
+  
+        name = Path(img_file).stem    
+        filePath = face_npy_path + name + '.npy'             
+    
+        face_rects = detector(img,1)
+        
+        #³oÃä¥u¨ú¿ëÃÑ²Ä¤@¦ì
+        for k, d in enumerate(face_rects):  
+            #68¯S¼xÂI°»´ú
+            shape = shape_predictor(img,d)
+            #128ºû¯S¼x¦V¶q´y­z
+            face_descriptor = face_rec_model.compute_face_descriptor(img,shape)
+            #Âà´«numpy array ®æ¦¡
+            face_descriptor = np.array(face_descriptor)
+            break
+    
+    
+        np.save(filePath, face_descriptor)
+```
+
+## ¸ò«e¤@½g¤@¼Ë,®t¦b¨Ï¥Înp.loadÅª¨ú.npyÀÉªºdata
+
+```python
 import dlib,os,sys,glob
 import numpy
 from skimage import io
@@ -17,20 +75,20 @@ def main():
     face_npy_path = "./resources"    
     img_name = sys.argv[1]
    
-    # Dlib çš„äººè‡‰åµæ¸¬å™¨
+    # Dlib ªº¤HÁy°»´ú¾¹
     detector = dlib.get_frontal_face_detector()
     
-    #äººè‡‰68ç‰¹å¾µé»æ¨¡å‹æª¢æ¸¬å™¨
+    #¤HÁy68¯S¼xÂI¼Ò«¬ÀË´ú¾¹
     shape_predictor = dlib.shape_predictor("../dat/shape_predictor_68_face_landmarks.dat") 
 
-    #è¼‰å…¥äººè‡‰è¾¨è­˜æ¨¡å‹åŠæª¢æ¸¬å™¨
+    #¸ü¤J¤HÁy¿ëÃÑ¼Ò«¬¤ÎÀË´ú¾¹
     face_rec_model = dlib.face_recognition_model_v1("../dat/dlib_face_recognition_resnet_model_v1.dat")     
 
     candidate_data = []
 
     npy_files = glob.glob(os.path.join(face_npy_path,"*.npy"))
 
-    #å–å¾—å°æ‡‰åå­—çš„å‘é‡
+    #¨ú±o¹ïÀ³¦W¦rªº¦V¶q
     for npy_file in npy_files:
         base = os.path.basename(npy_file)
         name = os.path.splitext(base)[0]
@@ -38,12 +96,12 @@ def main():
         candidate_data.append([name,vectors])
         
             
-    #è¾¨è­˜åœ–ç‰‡è™•ç†
+    #¿ëÃÑ¹Ï¤ù³B²z
     img = io.imread(img_name)
     face_rects = detector(img,1)
     distance = []
     
-    #é€™é‚Šåªå–è¾¨è­˜ç¬¬ä¸€ä½
+    #³oÃä¥u¨ú¿ëÃÑ²Ä¤@¦ì
     for k, d in enumerate(face_rects):  
         shape = shape_predictor(img,d)
         face_descriptor = face_rec_model.compute_face_descriptor(img,shape)
@@ -57,7 +115,7 @@ def main():
      
     candidate_distance_dict = {}
     
-    #è¨ˆç®—è¾¨è­˜åœ–ç‰‡èˆ‡åœ–æª”çš„å‘é‡å·®ç•°
+    #­pºâ¿ëÃÑ¹Ï¤ù»P¹ÏÀÉªº¦V¶q®t²§
     for candidate,vectors in  candidate_data:
         dist_ = np.linalg.norm(vectors - d_test)
         candidate_distance_dict[candidate] = dist_     
@@ -76,8 +134,4 @@ def main():
 
     cv2.waitKey(0)
     cv2.destroyAllWindows()
-
-
-
-main()
-
+```

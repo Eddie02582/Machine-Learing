@@ -2,7 +2,7 @@
 
 人臉檢測一樣差別是使用CNN model
 
-```
+```python
 import dlib
 from skimage import io
 import cv2

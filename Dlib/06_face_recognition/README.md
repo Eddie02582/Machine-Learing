@@ -1,3 +1,6 @@
+# Recognition Face Image
+
+```python
 import dlib,os,sys,glob
 import numpy
 from skimage import io
@@ -14,17 +17,17 @@ def main():
         exit()
     
     os.chdir(sys.path[0])   
-    #æ¬²è¾¨è­˜åœ–ç‰‡
+    #±ı¿ëÃÑ¹Ï¤ù
     img_name = sys.argv[1]    
     face_data_path = "./face"    
     
-    # Dlib çš„äººè‡‰åµæ¸¬å™¨
+    # Dlib ªº¤HÁy°»´ú¾¹
     detector = dlib.get_frontal_face_detector()
     
-    #äººè‡‰68ç‰¹å¾µé»æ¨¡å‹æª¢æ¸¬å™¨
+    #¤HÁy68¯S¼xÂI¼Ò«¬ÀË´ú¾¹
     shape_predictor = dlib.shape_predictor("../dat/shape_predictor_68_face_landmarks.dat") 
 
-    #è¼‰å…¥äººè‡‰è¾¨è­˜æ¨¡å‹åŠæª¢æ¸¬å™¨
+    #¸ü¤J¤HÁy¿ëÃÑ¼Ò«¬¤ÎÀË´ú¾¹
     face_rec_model = dlib.face_recognition_model_v1("../dat/dlib_face_recognition_resnet_model_v1.dat")   
 
     descriptors  = []
@@ -40,27 +43,27 @@ def main():
         
         dets = detector(img,1)
         
-        # å–å‡ºæ‰€æœ‰åµæ¸¬çš„çµæœ
+        # ¨ú¥X©Ò¦³°»´úªºµ²ªG
         for k, d in enumerate(dets):
-            #68ç‰¹å¾µé»åµæ¸¬
+            #68¯S¼xÂI°»´ú
             shape = shape_predictor(img,d)
             
-            #128ç¶­ç‰¹å¾µå‘é‡æè¿°
+            #128ºû¯S¼x¦V¶q´y­z
             face_descriptor = face_rec_model.compute_face_descriptor(img,shape)
             
-            #è½‰æ›numpy array æ ¼å¼
+            #Âà´«numpy array ®æ¦¡
             v = np.array(face_descriptor)
             descriptors.append(v)
             
-    #è¾¨è­˜åœ–ç‰‡è™•ç†
+    #¿ëÃÑ¹Ï¤ù³B²z
     img = io.imread(img_name)
     face_rects = detector(img,1)
     distance = []
     for k, d in enumerate(face_rects):
-        #68ç‰¹å¾µé»åµæ¸¬
+        #68¯S¼xÂI°»´ú
         shape = shape_predictor(img,d)
         
-        #128ç¶­ç‰¹å¾µå‘é‡æè¿°
+        #128ºû¯S¼x¦V¶q´y­z
         face_descriptor = face_rec_model.compute_face_descriptor(img,shape)
         
         d_test = np.array(face_descriptor)
@@ -70,19 +73,19 @@ def main():
         y2 = d.bottom()         
         cv2.rectangle(img, (x1, y1), (x2, y2), (0, 255, 0), 4, cv2.LINE_AA)
         for i in  descriptors:
-            #è¨ˆç®—å‘é‡å·®å€¼
+            #­pºâ¦V¶q®t­È
             dist_ = np.linalg.norm(i - d_test)
             distance.append(dist_)
 
     
     candidate_distance_dict = dict(zip(candidate,distance))
     
-    #ä¾ç…§è·é›¢æ’åº
+    #¨Ì·Ó¶ZÂ÷±Æ§Ç
     candidate_distance_dict_sorted = sorted(candidate_distance_dict.items(),key = lambda d:d[1])
     
     
     print (candidate_distance_dict_sorted)
-    #å–å‡ºæœ€ç›¸åƒçš„
+    #¨ú¥X³Ì¬Û¹³ªº
     result = candidate_distance_dict_sorted[0][0]
 
     cv2.putText(img, result, (x1, y1), cv2.FONT_HERSHEY_DUPLEX,0.7, (255, 255, 255), 1, cv2.LINE_AA)
@@ -98,3 +101,6 @@ def main():
 
 main()
 
+
+
+```

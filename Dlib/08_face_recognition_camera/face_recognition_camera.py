@@ -22,7 +22,8 @@ def main():
         
         
         name = face_rec.get_face_recognition(frame)
-        print (name)
+        if name:
+            cv2.putText(frame, name, (15, 15), cv2.FONT_HERSHEY_DUPLEX,0.7, (255, 255, 0), 1, cv2.LINE_AA)        
         out.write(frame)
         cv2.imshow("Face Detection", frame)
         if cv2.waitKey(1) & 0xFF == ord('q'):

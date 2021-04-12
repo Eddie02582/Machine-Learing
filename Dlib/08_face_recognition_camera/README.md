@@ -1,3 +1,10 @@
+# Face Recognition with camera
+
+
+³oÃä§â¥L¼g¦¨clss ¤è«K©I¥s
+
+
+```python
 import dlib,os,sys,glob
 import numpy as np
 from skimage import io
@@ -12,10 +19,10 @@ class FaceRecognition():
 
         self.detector = dlib.get_frontal_face_detector()
     
-        #äººè‡‰68ç‰¹å¾µé»žæ¨¡åž‹æª¢æ¸¬å™¨
+        #¤HÁy68¯S¼xÂI¼Ò«¬ÀË´ú¾¹
         self.shape_predictor = dlib.shape_predictor(self.shape_predictor_path) 
 
-        #è¼‰å…¥äººè‡‰è¾¨è­˜æ¨¡åž‹åŠæª¢æ¸¬å™¨
+        #¸ü¤J¤HÁy¿ëÃÑ¼Ò«¬¤ÎÀË´ú¾¹
         self.face_rec_model = dlib.face_recognition_model_v1(self.face_recognition_model_path) 
         self.candidate_data = []
 
@@ -34,16 +41,16 @@ class FaceRecognition():
     def get_image_description(self,img): 
         #img = io.read(file)            
         dets = self.detector(img,1)
-        # å–å‡ºæ‰€æœ‰åµæ¸¬çš„çµæžœ
+        # ¨ú¥X©Ò¦³°»´úªºµ²ªG
         descriptors = []
         for k, d in enumerate(dets):
-            #68ç‰¹å¾µé»žåµæ¸¬
+            #68¯S¼xÂI°»´ú
             shape = self.shape_predictor(img,d)
                 
-            #128ç¶­ç‰¹å¾µå‘é‡æè¿°
+            #128ºû¯S¼x¦V¶q´y­z
             face_descriptor = self.face_rec_model.compute_face_descriptor(img,shape)
                 
-            #è½‰æ›numpy array æ ¼å¼
+            #Âà´«numpy array ®æ¦¡
             v = np.array(face_descriptor) 
             #descriptors.append(v)
             return v
@@ -65,11 +72,43 @@ class FaceRecognition():
             name,score = candidate_distance[0]            
             if score > 0.6:
                 name = "vistor"        
-        return name
-                
+        return name         
+
+```
+
+```python
+import dlib,os,sys,glob
+import numpy as np
+from skimage import io
+import numpy as np
+import cv2
+import imutils
+import face_rec as fc
+
+
+
+def main():
+    cap = cv2.VideoCapture(0)    
+    fourcc = cv2.VideoWriter_fourcc(*'XVID')
+    width,height = 640,480
+    out = cv2.VideoWriter('output.avi', fourcc, 20.0, (width, height))    
+    
+    face_rec = fc.FaceRecognition()
+    face_rec.load_person_data()
+    
+    while cap.isOpened():
+        ret, frame = cap.read()
         
         
-        
-        
-        
-        
+        name = face_rec.get_face_recognition(frame)
+        if name:
+            cv2.putText(frame, name, (15, 15), cv2.FONT_HERSHEY_DUPLEX,0.7, (255, 255, 0), 1, cv2.LINE_AA)        
+        out.write(frame)
+        cv2.imshow("Face Detection", frame)
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break;
+    cap.release()
+    out.release()
+    cv2.destroyAllWindows()
+    
+```
