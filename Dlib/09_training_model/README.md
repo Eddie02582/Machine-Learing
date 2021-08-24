@@ -3,7 +3,7 @@
 
 ## imglab
 Dlib¦³´£¨Ñ¤@­Ó tool¥s imglab¥i¥HÀ°§U»s§@°V½m¥Îªº¼Æ¾Ú,¦w¸Ë¤è¦¡¦p¤U
-»Ý¥ý¦w¸Ëcmake ...(«Ý­÷)
+»Ý¥ý¦w¸Ëcmake ...
 
 ```
     cd dlib/tools/imglab
@@ -21,7 +21,7 @@ Dlib¦³´£¨Ñ¤@­Ó tool¥s imglab¥i¥HÀ°§U»s§@°V½m¥Îªº¼Æ¾Ú,¦w¸Ë¤è¦¡¦p¤U
 ```
 °õ¦æ«á·|²£¥Ítrain_data.xml,¸Ì­±¤º®e¥]§timages©Ò¦³¹Ï¤ù¸ê°T
 
-```
+```xml
 <?xml version='1.0' encoding='ISO-8859-1'?>
 <?xml-stylesheet type='text/xsl' href='image_metadata_stylesheet.xsl'?>
 <dataset>
@@ -45,10 +45,10 @@ Dlib¦³´£¨Ñ¤@­Ó tool¥s imglab¥i¥HÀ°§U»s§@°V½m¥Îªº¼Æ¾Ú,¦w¸Ë¤è¦¡¦p¤U
 ```
     imglab train_data.xml
 ```
+<img src="imglab-1.PNG">
 
-
-¥i¥H«öµÛ Shift + ·Æ¹«¥ªÁä¿ï¨ú­n®·®»ªº³¡¤À¡C­Y¿ï¿ù¥i¥H¥Î·Æ¹«¥ªÁäÂùÀ»¬õ¦â®Ø®Ø¡A®Ø®ØÅÜ«C¦â´N¥i¥H«ö delete§R°£¤F¡C
-
+«öµÛ Shift + ·Æ¹«¥ªÁä¿ï¨ú­n®·®»ªº³¡¤À¡C¿ï¿ù¥Î·Æ¹«¥ªÁäÂùÀ»¬õ¦â®Ø®Ø¡A®Ø®ØÅÜ«C¦â«ödelete§R°£
+<img src="imglab-2.PNG">
 
 ¦b Menu/File¸ÌÂIÀ» Save¡A´N¥i¥H§â­è­èªº¼Ðª`Àx¦s¦b mydataset.xml¤¤¡C
   
@@ -56,16 +56,13 @@ Dlib¦³´£¨Ñ¤@­Ó tool¥s imglab¥i¥HÀ°§U»s§@°V½m¥Îªº¼Æ¾Ú,¦w¸Ë¤è¦¡¦p¤U
   
 ¦pªG»Ý­n¹ï¤@¨Ç¯S¼x¶i¦æ¼Ðª`¡C±µÄòµÛ­èªº mydataset.xmlÄ~Äò³B²z¡C°²³]¶È¹ï¹Ï¹³¼Ðµù¤­­Ó¯S¼x¡C
 ./imglab train_data.xml --parts "1 2 3 4 5"
-  
-  
-  
-  
+<img src="imglab-3.PNG">  
   
   
   
 ¥i¥Hµo²{train_data.xml »P­ì¥»¦h¤Fbox tag
   
-```
+```xml
 <?xml version='1.0' encoding='ISO-8859-1'?>
 <?xml-stylesheet type='text/xsl' href='image_metadata_stylesheet.xsl'?>
 <dataset>
