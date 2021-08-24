@@ -150,7 +150,6 @@ print("Training accuracy: {}".format(
 ```
 ## test data
 ```python
-
 import os
 import sys
 import dlib
@@ -161,8 +160,6 @@ detector = dlib.simple_object_detector("detector.svm")
 
 current_path = os.getcwd()
 test_folder = current_path + '/elephant_test/images/'
-
-print (test_folder)
 
 for f in glob.glob(test_folder+'*.jpg'):
     print("Processing file: {}".format(f))
@@ -185,12 +182,9 @@ for f in glob.glob(test_folder+'*.jpg'):
 k = cv2.waitKey(0)
 cv2.destroyAllWindows()
 
+```
 
-
-
-
-
-
+<img src="result.PNG"> 
 
 
 
