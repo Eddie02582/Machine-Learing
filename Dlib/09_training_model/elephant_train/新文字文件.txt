@@ -1,3 +1,0 @@
-imglab -c mydata.xml ./
-imglab -c mydata.xml ./images
-imglab mydata.xml

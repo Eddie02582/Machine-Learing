@@ -1,7 +1,7 @@
 # Face Recognition with camera
 
 
-這邊把他寫成clss 方便呼叫
+這邊把他寫成class 方便呼叫
 
 
 ```python

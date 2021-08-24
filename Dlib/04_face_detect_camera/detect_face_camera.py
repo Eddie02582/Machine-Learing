@@ -20,7 +20,10 @@ detector = dlib.get_frontal_face_detector()
 while cap.isOpened():
     ret, frame = cap.read()
     # 偵測人臉
-    face_rects, scores, idx = detector.run(frame, 0)    
+    
+    frame_rgb = cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)    
+    face_rects, scores, idx = detector.run(frame_rgb, 0)
+    #face_rects, scores, idx = detector.run(frame, 0)    
     for i, d in enumerate(face_rects):
         x1 = d.left()
         y1 = d.top()

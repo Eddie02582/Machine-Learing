@@ -1,0 +1,200 @@
+# Training Model
+
+
+## imglab
+Dlib¦³´£¨Ñ¤@­Ó tool¥s imglab¥i¥HÀ°§U»s§@°V½m¥Îªº¼Æ¾Ú,¦w¸Ë¤è¦¡¦p¤U
+»Ý¥ý¦w¸Ëcmake ...(«Ý­÷)
+
+```
+    cd dlib/tools/imglab
+    mkdir build
+    cd build
+    cmake ..
+    cmake --build . --config Release
+```
+¦w¸Ë¦¨¥\«á¡A¥i¥H¨ì dlib/tools/imglab/build¤¤§ä¨ì imglabÀÉ®×
+
+°õ¦æ imglab -c xml_file img_folder
+
+```
+    imglab -c train_data.xml ./images
+```
+°õ¦æ«á·|²£¥Ítrain_data.xml,¸Ì­±¤º®e¥]§timages©Ò¦³¹Ï¤ù¸ê°T
+
+```
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<?xml-stylesheet type='text/xsl' href='image_metadata_stylesheet.xsl'?>
+<dataset>
+<name>imglab dataset</name>
+<comment>Created by imglab tool.</comment>
+<images>
+  <image file='images\image_0001.jpg'>
+  </image>
+  <image file='images\image_0002.jpg'>
+  </image>
+  <image file='images\image_0003.jpg'>
+  </image>
+  <image file='images\image_0004.jpg'>
+  </image>
+ 
+  ...
+</images>
+ ```
+  
+°õ¦æ
+```
+    imglab train_data.xml
+```
+
+
+¥i¥H«öµÛ Shift + ·Æ¹«¥ªÁä¿ï¨ú­n®·®»ªº³¡¤À¡C­Y¿ï¿ù¥i¥H¥Î·Æ¹«¥ªÁäÂùÀ»¬õ¦â®Ø®Ø¡A®Ø®ØÅÜ«C¦â´N¥i¥H«ö delete§R°£¤F¡C
+
+
+¦b Menu/File¸ÌÂIÀ» Save¡A´N¥i¥H§â­è­èªº¼Ðª`Àx¦s¦b mydataset.xml¤¤¡C
+  
+  
+  
+¦pªG»Ý­n¹ï¤@¨Ç¯S¼x¶i¦æ¼Ðª`¡C±µÄòµÛ­èªº mydataset.xmlÄ~Äò³B²z¡C°²³]¶È¹ï¹Ï¹³¼Ðµù¤­­Ó¯S¼x¡C
+./imglab train_data.xml --parts "1 2 3 4 5"
+  
+  
+  
+  
+  
+  
+  
+¥i¥Hµo²{train_data.xml »P­ì¥»¦h¤Fbox tag
+  
+```
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<?xml-stylesheet type='text/xsl' href='image_metadata_stylesheet.xsl'?>
+<dataset>
+<name>imglab dataset</name>
+<comment>Created by imglab tool.</comment>
+<images>
+  <image file='images\image_0001.jpg'>
+    <box top='46' left='35' width='261' height='171'/>
+  </image>
+  <image file='images\image_0002.jpg'>
+    <box top='35' left='45' width='184' height='128'/>
+  </image>
+  <image file='images\image_0003.jpg'>
+    <box top='58' left='38' width='241' height='167'/>
+  </image>
+  <image file='images\image_0004.jpg'>
+    <box top='42' left='36' width='241' height='169'/>
+  </image>
+  <image file='images\image_0005.jpg'>
+    <box top='12' left='6' width='285' height='163'/>
+  </image>
+  <image file='images\image_0006.jpg'>
+    <box top='14' left='14' width='255' height='175'/>
+  </image>
+  <image file='images\image_0007.jpg'>
+    <box top='64' left='38' width='183' height='205'/>
+  </image>
+  ...
+```  
+  
+## traning data
+³oÃä±Ntestdata´ú¸Õµù¸Ñ 
+```python
+
+# -*- coding: utf-8 -*-
+import os
+import sys
+import glob
+import dlib
+import cv2
+
+# options¥Î©ó³]¸m°V½mªº°Ñ¼Æ©M¼Ò¦¡
+options = dlib.simple_object_detector_training_options()
+# Since faces are left/right symmetric we can tell the trainer to train a
+# symmetric detector.  This helps it get the most value out of the training
+# data.
+
+options.add_left_right_image_flips = True
+
+
+# ¤ä«ù¦V¶q¾÷ªºC°Ñ¼Æ¡A³q±`Àq»{¨ú¬°5.¦Û¤v¾A·í§ó§ï°Ñ¼Æ¥H¹F¨ì³Ì¦nªº®ÄªG
+options.C = 5
+# ½uµ{¼Æ¡A§A¹q¸£¦³4®Öªº¸Ü´N¶ñ4
+options.num_threads = 4
+options.be_verbose = True
+
+
+current_path = os.getcwd()
+train_folder = current_path + '/elephant_train/'
+#test_folder = current_path + '/elephant_test/'
+train_xml_path = train_folder + 'train_data.xml'
+#test_xml_path = test_folder + 'elephant.xml'
+
+print("training file path:" + train_xml_path)
+# print(train_xml_path)
+#print("testing file path:" + test_xml_path)
+# print(test_xml_path)
+
+
+print("start training:")
+dlib.train_simple_object_detector(train_xml_path, 'detector.svm', options)
+
+print("")  # Print blank line to create gap from previous output
+print("Training accuracy: {}".format(
+    dlib.test_simple_object_detector(train_xml_path, "detector.svm")))
+
+# print("Testing accuracy: {}".format(
+    # dlib.test_simple_object_detector(test_xml_path, "detector.svm")))
+ 
+
+```
+## test data
+```python
+
+import os
+import sys
+import dlib
+import cv2
+import glob
+
+detector = dlib.simple_object_detector("detector.svm")
+
+current_path = os.getcwd()
+test_folder = current_path + '/elephant_test/images/'
+
+print (test_folder)
+
+for f in glob.glob(test_folder+'*.jpg'):
+    print("Processing file: {}".format(f))
+    img = cv2.imread(f, cv2.IMREAD_COLOR)
+    b, g, r = cv2.split(img)
+    img2 = cv2.merge([r, g, b])
+    dets = detector(img2)
+    print("Number of faces detected: {}".format(len(dets)))
+    for index, face in enumerate(dets):
+        print('face {}; left {}; top {}; right {}; bottom {}'.format(index, face.left(), face.top(), face.right(), face.bottom()))
+
+        left = face.left()
+        top = face.top()
+        right = face.right()
+        bottom = face.bottom()
+        cv2.rectangle(img, (left, top), (right, bottom), (0, 255, 0), 3)
+    cv2.namedWindow(f, cv2.WINDOW_AUTOSIZE)
+    cv2.imshow(f, img)
+
+k = cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+
+
+
+
+
+
+
+
+
+
+
+
+```
+  
