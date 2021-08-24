@@ -2,8 +2,8 @@
 
 
 ## imglab
-Dlib¦³´£¨Ñ¤@­Ó tool¥s imglab¥i¥HÀ°§U»s§@°V½m¥Îªº¼Æ¾Ú,¦w¸Ë¤è¦¡¦p¤U
-»Ý¥ý¦w¸Ëcmake ...
+Dlibæœ‰æä¾›ä¸€å€‹ toolå« imglabå¯ä»¥å¹«åŠ©è£½ä½œè¨“ç·´ç”¨çš„æ•¸æ“š,å®‰è£æ–¹å¼å¦‚ä¸‹
+éœ€å…ˆå®‰è£cmake ...
 
 ```
     cd dlib/tools/imglab
@@ -12,14 +12,14 @@ Dlib¦³´£¨Ñ¤@­Ó tool¥s imglab¥i¥HÀ°§U»s§@°V½m¥Îªº¼Æ¾Ú,¦w¸Ë¤è¦¡¦p¤U
     cmake ..
     cmake --build . --config Release
 ```
-¦w¸Ë¦¨¥\«á¡A¥i¥H¨ì dlib/tools/imglab/build¤¤§ä¨ì imglabÀÉ®×
+å®‰è£æˆåŠŸå¾Œï¼Œå¯ä»¥åˆ° dlib/tools/imglab/buildä¸­æ‰¾åˆ° imglabæª”æ¡ˆ
 
-°õ¦æ imglab -c xml_file img_folder
+åŸ·è¡Œ imglab -c xml_file img_folder
 
 ```
     imglab -c train_data.xml ./images
 ```
-°õ¦æ«á·|²£¥Ítrain_data.xml,¸Ì­±¤º®e¥]§timages©Ò¦³¹Ï¤ù¸ê°T
+åŸ·è¡Œå¾Œæœƒç”¢ç”Ÿtrain_data.xml,è£¡é¢å…§å®¹åŒ…å«imagesæ‰€æœ‰åœ–ç‰‡è³‡è¨Š
 
 ```xml
 <?xml version='1.0' encoding='ISO-8859-1'?>
@@ -41,26 +41,26 @@ Dlib¦³´£¨Ñ¤@­Ó tool¥s imglab¥i¥HÀ°§U»s§@°V½m¥Îªº¼Æ¾Ú,¦w¸Ë¤è¦¡¦p¤U
 </images>
  ```
   
-°õ¦æ
+åŸ·è¡Œ
 ```
     imglab train_data.xml
 ```
 <img src="imglab-1.PNG">
 
-«öµÛ Shift + ·Æ¹«¥ªÁä¿ï¨ú­n®·®»ªº³¡¤À¡C¿ï¿ù¥Î·Æ¹«¥ªÁäÂùÀ»¬õ¦â®Ø®Ø¡A®Ø®ØÅÜ«C¦â«ödelete§R°£
+æŒ‰è‘— Shift + æ»‘é¼ å·¦éµé¸å–è¦æ•æ‰çš„éƒ¨åˆ†ã€‚é¸éŒ¯ç”¨æ»‘é¼ å·¦éµé›™æ“Šç´…è‰²æ¡†æ¡†ï¼Œæ¡†æ¡†è®Šé’è‰²æŒ‰deleteåˆªé™¤
 <img src="imglab-2.PNG">
 
-¦b Menu/File¸ÌÂIÀ» Save¡A´N¥i¥H§â­è­èªº¼Ðª`Àx¦s¦b mydataset.xml¤¤¡C
+åœ¨ Menu/Fileè£¡é»žæ“Š Saveï¼Œå°±å¯ä»¥æŠŠå‰›å‰›çš„æ¨™æ³¨å„²å­˜åœ¨ mydataset.xmlä¸­ã€‚
   
   
   
-¦pªG»Ý­n¹ï¤@¨Ç¯S¼x¶i¦æ¼Ðª`¡C±µÄòµÛ­èªº mydataset.xmlÄ~Äò³B²z¡C°²³]¶È¹ï¹Ï¹³¼Ðµù¤­­Ó¯S¼x¡C
+å¦‚æžœéœ€è¦å°ä¸€äº›ç‰¹å¾µé€²è¡Œæ¨™æ³¨ã€‚æŽ¥çºŒè‘—å‰›çš„ mydataset.xmlç¹¼çºŒè™•ç†ã€‚å‡è¨­åƒ…å°åœ–åƒæ¨™è¨»äº”å€‹ç‰¹å¾µã€‚
 ./imglab train_data.xml --parts "1 2 3 4 5"
 <img src="imglab-3.PNG">  
   
   
   
-¥i¥Hµo²{train_data.xml »P­ì¥»¦h¤Fbox tag
+å¯ä»¥ç™¼ç¾train_data.xml èˆ‡åŽŸæœ¬å¤šäº†box tag
   
 ```xml
 <?xml version='1.0' encoding='ISO-8859-1'?>
@@ -94,7 +94,7 @@ Dlib¦³´£¨Ñ¤@­Ó tool¥s imglab¥i¥HÀ°§U»s§@°V½m¥Îªº¼Æ¾Ú,¦w¸Ë¤è¦¡¦p¤U
 ```  
   
 ## traning data
-³oÃä±Ntestdata´ú¸Õµù¸Ñ 
+é€™é‚Šå°‡testdataæ¸¬è©¦è¨»è§£ 
 ```python
 
 # -*- coding: utf-8 -*-
@@ -104,7 +104,7 @@ import glob
 import dlib
 import cv2
 
-# options¥Î©ó³]¸m°V½mªº°Ñ¼Æ©M¼Ò¦¡
+# optionsç”¨æ–¼è¨­ç½®è¨“ç·´çš„åƒæ•¸å’Œæ¨¡å¼
 options = dlib.simple_object_detector_training_options()
 # Since faces are left/right symmetric we can tell the trainer to train a
 # symmetric detector.  This helps it get the most value out of the training
@@ -113,9 +113,9 @@ options = dlib.simple_object_detector_training_options()
 options.add_left_right_image_flips = True
 
 
-# ¤ä«ù¦V¶q¾÷ªºC°Ñ¼Æ¡A³q±`Àq»{¨ú¬°5.¦Û¤v¾A·í§ó§ï°Ñ¼Æ¥H¹F¨ì³Ì¦nªº®ÄªG
+# æ”¯æŒå‘é‡æ©Ÿçš„Cåƒæ•¸ï¼Œé€šå¸¸é»˜èªå–ç‚º5.è‡ªå·±é©ç•¶æ›´æ”¹åƒæ•¸ä»¥é”åˆ°æœ€å¥½çš„æ•ˆæžœ
 options.C = 5
-# ½uµ{¼Æ¡A§A¹q¸£¦³4®Öªº¸Ü´N¶ñ4
+# ç·šç¨‹æ•¸ï¼Œä½ é›»è…¦æœ‰4æ ¸çš„è©±å°±å¡«4
 options.num_threads = 4
 options.be_verbose = True
 
